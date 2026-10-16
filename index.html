@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>垃圾时装周：干员行动</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="game-shell">
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">垃</div>
+      <div><h1>垃圾时装周</h1><p>OPERATOR EXTRACTION</p></div>
+    </div>
+    <div class="operator-chip"><span id="operatorDot"></span><div><b id="operatorName">红狼</b><small id="fsmState">待机</small></div></div>
+    <div class="timer" id="timer">10:00</div>
+    <div class="stats">
+      <div class="stat"><b id="value">¥0</b><span>估值</span></div>
+      <div class="stat"><b id="weight">0 / 12kg</b><span>负重</span></div>
+      <div class="stat"><b id="hp">100</b><span>生命</span></div>
+    </div>
+  </header>
+
+  <section class="stage" id="stage">
+    <canvas id="canvas" aria-label="俯视角搜打撤游戏画面"></canvas>
+    <div class="objective">
+      <strong><span id="objectiveTitle">搜出 ¥1200 后撤离</span><span id="objectiveCount">0%</span></strong>
+      <div class="bar"><i id="objectiveBar"></i></div>
+      <p id="objectiveText">按 E 搜索容器，Tab 拾取物资，达标后拉闸撤离。</p>
+    </div>
+    <div class="stamina"><span>体力</span><div><i id="staminaBar"></i></div></div>
+    <div class="prompt" id="prompt"></div>
+    <div class="toast" id="toasts"></div>
+
+    <div class="backpack-layer hidden" id="backpackLayer" role="dialog" aria-modal="true" aria-labelledby="backpackTitle">
+      <div class="backpack-window">
+        <header class="backpack-head">
+          <div>
+            <span class="kicker">FIELD INVENTORY</span>
+            <h2 id="backpackTitle">战术背包</h2>
+          </div>
+          <div class="backpack-summary">
+            <span><b id="bagSlots">0 / 10</b> 格位</span>
+            <span><b id="bagWeight">0 / 12kg</b> 负重</span>
+            <span><b id="bagValue">¥0</b> 估值</span>
+          </div>
+          <button class="icon-button" id="closeBackpack" type="button" title="关闭背包" aria-label="关闭背包">×</button>
+        </header>
+        <div class="backpack-body">
+          <section class="bag-panel drop-panel" id="bagDropZone" aria-label="背包物资">
+            <div class="panel-title"><div><span>随身携带</span><b>背包物资</b></div><small>拖入右侧可丢弃</small></div>
+            <div class="bag-grid" id="bagGrid"></div>
+          </section>
+          <section class="ground-panel drop-panel" id="groundDropZone" aria-label="附近地面物资">
+            <div class="panel-title"><div><span>角色附近的可拾取物资</span><b>附近地面</b></div><small id="groundCount">0 件</small></div>
+            <div class="ground-list" id="groundList"></div>
+          </section>
+        </div>
+        <footer class="backpack-foot">
+          <span><kbd>Tab</kbd> 关闭背包</span>
+          <span>拖拽 / 双击转移 · 触屏轻点 · 整理时战斗暂停</span>
+        </footer>
+      </div>
+    </div>
+
+    <div class="touch" aria-hidden="true">
+      <div class="stick" id="stick"><div class="nub" id="nub"></div></div>
+      <div class="touch-actions">
+        <button class="round utility" id="bagTouch">包</button>
+        <button class="round utility" id="crouchTouch">蹲</button>
+        <button class="round" id="shootTouch">投掷</button>
+        <button class="round search" id="searchTouch">搜索</button>
+      </div>
+    </div>
+
+    <div class="overlay" id="operatorSelect">
+      <div class="operator-modal">
+        <div class="select-head">
+          <div><span class="kicker">SELECT YOUR OPERATOR</span><h2>选择干员</h2></div>
+          <p>红狼已预选。选择会改变角色外观和专长，本阶段完整开放红狼技能树。</p>
+        </div>
+        <div class="operator-grid" id="operatorGrid">
+          <button class="operator-card" data-operator="vyron">
+            <div class="portrait vyron"><i></i><span>01</span></div>
+            <div class="card-copy"><div class="role">突击 · 机动</div><h3>威龙</h3><p>虎蹲炮 / 动力推进 / 磁吸炸弹</p></div>
+            <div class="pick-mark">选择</div>
+          </button>
+          <button class="operator-card selected" data-operator="redwolf">
+            <div class="portrait redwolf"><i></i><span>02</span></div>
+            <div class="card-copy"><div class="role">突击 · 强攻</div><h3>红狼</h3><p>动力外骨骼 / 战术型烟雾弹 / 三联装手炮</p></div>
+            <div class="pick-mark">已选择</div>
+          </button>
+          <button class="operator-card" data-operator="stinger">
+            <div class="portrait stinger"><i></i><span>03</span></div>
+            <div class="card-copy"><div class="role">支援 · 救援</div><h3>蜂医</h3><p>激素枪 / 蜂巢科技烟雾弹 / 高效救援</p></div>
+            <div class="pick-mark">选择</div>
+          </button>
+        </div>
+        <div class="loadout-preview">
+          <div><b>行动操作</b><span>E 搜索容器 · Tab 背包 · Shift 奔跑 · C 蹲伏</span></div>
+          <div id="selectedSkills"><b>红狼技能树</b><span>X 动力外骨骼 · G 战术型烟雾弹 · V 三联装手炮</span></div>
+        </div>
+        <button class="primary" id="deploy">确认干员并开始行动</button>
+      </div>
+    </div>
+
+    <div class="overlay hidden" id="gameover">
+      <div class="result-modal">
+        <span class="kicker" id="resultKicker">RUN COMPLETE</span>
+        <h2 id="resultTitle">撤离成功</h2><p id="resultText"></p>
+        <div class="result-grid"><div><strong id="resultValue">¥0</strong><span>带出价值</span></div><div><strong id="resultItems">0</strong><span>潮物件数</span></div><div><strong id="resultRank">D</strong><span>街头评级</span></div></div>
+        <button class="primary" id="restart">重新选择干员</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bottom">
+    <div class="inventory" id="inventory"></div>
+    <div class="skill-tree" id="skillTree" aria-label="红狼技能树">
+      <button class="skill ultimate" data-skill="ultimate" title="动力外骨骼：8 秒内提升移动速度">
+        <kbd>X</kbd><span><b>动力外骨骼</b><small id="ultimateStatus">就绪</small></span><i id="ultimateCooldown"></i>
+      </button>
+      <button class="skill" data-skill="smoke" title="烟幕弹：向瞄准方向投掷遮蔽烟幕">
+        <kbd>G</kbd><span><b>烟幕弹</b><small id="smokeStatus">就绪</small></span><i id="smokeCooldown"></i>
+      </button>
+      <button class="skill" data-skill="cannon" title="三联装手炮：发射高爆榴弹">
+        <kbd>V</kbd><span><b>三联装手炮</b><small id="cannonStatus">就绪</small></span><i id="cannonCooldown"></i>
+      </button>
+    </div>
+    <div class="actions"><div class="ammo"><b id="ammo">8</b><span>罐头弹药</span></div><button class="secondary" id="openBackpack"><kbd>Tab</kbd> 背包</button><button class="secondary" id="drop">丢弃最重</button><button class="primary compact" id="pause">暂停</button></div>
+  </footer>
+</main>
+<script src="game.js"></script>
+</body>
+</html>
