@@ -1,0 +1,127 @@
+{
+  "generator": "OmwAI MCP generate_image",
+  "generatedDate": "2026-11-02",
+  "order": "row-major",
+  "notes": [
+    "Generated images are concept-quality animation sheets; consistent motion and pivot alignment require in-game review.",
+    "Sprite sheets were normalized per cell to 1024x1024 with 16px cell padding; originals are preserved.",
+    "Scene is artwork only; collision geometry is not supplied.",
+    "Suggested FPS values are initial tuning values, not verified game timings."
+  ],
+  "assets": [
+    {
+      "id": "enemy",
+      "file": "enemy-rifle-walk.png",
+      "width": 1024,
+      "height": 1024,
+      "columns": 4,
+      "rows": 2,
+      "frames": 8,
+      "frameWidth": 256,
+      "frameHeight": 512,
+      "alpha": true,
+      "suggestedFps": 10,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "taskId": "task_oWvLUHNFdVlSrQhoOij1ymr04NYSyyvf",
+      "prompt": "Use case: stylized-concept. Asset type: production 2D top-down shooter enemy sprite sheet. Create ONE strict 4 column by 2 row equal-cell grid, 8 frames total, 1024x1024 sheet with 256x512 cells. Same original enemy guard wearing muted olive tactical clothing, helmet and compact rifle, true overhead orthographic view looking straight down, rifle pointing RIGHT in every frame. Eight sequential subtle walk-cycle frames, consistent character size, identical center pivot in every cell, entire body and rifle fully inside each cell with padding. Clean readable hand-painted 2D game art, sharp silhouette, restrained shading, appropriate for a recycling depot extraction shooter. Transparent background with actual alpha if supported. No floor, no cast shadows outside sprite, no grid lines, no text, no labels, no watermarks, no perspective or isometric view, no blood. The rifle and hands must be clearly visible from above."
+    },
+    {
+      "id": "scene",
+      "file": "depot-topdown.png",
+      "width": 1536,
+      "height": 1024,
+      "columns": 1,
+      "rows": 1,
+      "frames": 1,
+      "frameWidth": 1536,
+      "frameHeight": 1024,
+      "alpha": false,
+      "suggestedFps": 0,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "taskId": "task_lSRaA3lfPS6tx31bS5LHB5XYjhYPw5Xe",
+      "prompt": "Use case: stylized-concept. Asset type: 2D overhead extraction-shooter environment background. True straight-down orthographic aerial view of a compact abandoned recycling depot arena. Readable hand-painted game art matching olive-clad tactical sprites, concrete yard, scattered recycling containers, warehouse roofs around the outside, loading areas, small stacks of scrap, chain link fences, faded road markings, restrained green plants. Clear connected wide traversable lanes with open central space, varied useful cover grouped near edges. Entire playable depot visible, consistent scale, soft neutral daylight, crisp detailed surfaces. NO characters, no weapons, no HUD, no lettering, no labels, no watermark. No tilted camera, no isometric perspective. Landscape composition 1536x1024."
+    },
+    {
+      "id": "muzzle",
+      "file": "muzzle-flash.png",
+      "width": 1024,
+      "height": 1024,
+      "columns": 4,
+      "rows": 4,
+      "frames": 16,
+      "frameWidth": 256,
+      "frameHeight": 256,
+      "alpha": true,
+      "suggestedFps": 40,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "taskId": "task_RoXYd6V2Kj3cmJmDjJ0WO9RPwt78ncjF",
+      "prompt": "Use case: stylized-concept. Asset type: 2D game muzzle flash animation sprite sheet. ONE 4x4 uniform grid of 16 sequential frames, read left-to-right then top-to-bottom. Strict overhead orthographic view. Isolated rifle muzzle flash points RIGHT, fixed emission origin at each cell center; short bright yellow-white flash grows rapidly into sharp orange tongues with a few tiny sparks then fades to nothing. Only the flash effect, no gun and no character. Crisp hand-painted game VFX matching tactical recycling depot game art. Actual transparent background if supported. Consistent cell sizes, at least 15 percent blank padding per cell, no effect crosses cell edges. No text, no numbers, no grid lines, no watermark. 1024x1024 sheet, 256x256 per cell."
+    },
+    {
+      "id": "explosion",
+      "file": "explosion.png",
+      "width": 1024,
+      "height": 1024,
+      "columns": 4,
+      "rows": 4,
+      "frames": 16,
+      "frameWidth": 256,
+      "frameHeight": 256,
+      "alpha": true,
+      "suggestedFps": 24,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "taskId": "task_v76isnEbcTtj2wUQkDzs6f4jmSzdIEno",
+      "prompt": "Use case: stylized-concept. Asset type: 2D game explosion animation sprite sheet. ONE exact 4x4 uniform grid containing 16 sequential frames, left-to-right then top-to-bottom. True straight-down overhead orthographic view of a radial grenade explosion: tiny white-yellow ignition, expanding yellow orange fireball ring with debris sparks, orange embers, then dark gray dissipating smoke. All 16 stages clearly distinct, fixed center pivot and fixed scale, growing effect contained inside every 256x256 cell with blank margins. Crisp hand-painted tactical 2D game VFX. Transparent background with actual alpha if supported, no ground, no characters, no blood, no text, no grid lines, no watermark. 1024x1024."
+    },
+    {
+      "id": "smoke",
+      "file": "smoke.png",
+      "width": 1024,
+      "height": 1024,
+      "columns": 4,
+      "rows": 4,
+      "frames": 16,
+      "frameWidth": 256,
+      "frameHeight": 256,
+      "alpha": true,
+      "suggestedFps": 12,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "taskId": "task_13HvFx8WQmPdolj4slTucwS8qGzIva6e",
+      "prompt": "Use case: stylized-concept. Asset type: tactical 2D game smoke animation sprite sheet. ONE exact 4x4 uniform grid containing 16 sequential frames, left-to-right then top-to-bottom. True straight-down overhead orthographic view. Small gray puff expands into dense soft swirling light-gray tactical smoke cloud, billows and disperses gradually into translucent wisps. Fixed center in each 256x256 cell, consistent scale, full cloud inside cell with generous 15 percent padding, no overlap between cells. Clean hand-painted 2D game VFX, soft smoky edges and readable internal volume. Transparent background with actual alpha if supported. Only smoke, no canister, no ground, no characters, no words, no numbers, no grid borders, no watermark. 1024x1024."
+    },
+    {
+      "id": "impact",
+      "file": "bullet-impact.png",
+      "width": 1024,
+      "height": 1024,
+      "columns": 4,
+      "rows": 4,
+      "frames": 16,
+      "frameWidth": 256,
+      "frameHeight": 256,
+      "alpha": true,
+      "suggestedFps": 32,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "taskId": "task_YobHFzdVwPtdKBm4yNpWJgCYwySRDbIP",
+      "prompt": "Use case: stylized-concept. Asset type: 2D game bullet impact animation sprite sheet. ONE exact 4x4 uniform grid of 16 sequential frames, reading left-to-right then top-to-bottom. True overhead orthographic view of a small bullet strike on hard concrete represented as isolated effect: tiny white-hot point, brief yellow sparks fan radially with a few gray chips, little pale-gray dust puff, sparks fade and dust disperses. Compact localized effect. Fixed central pivot in every 256x256 cell, at least 20 percent blank padding, no crossing cell boundaries. Crisp hand-painted 2D tactical game VFX. Actual transparent background if supported; no concrete background, no crater decal, no blood, no gun, no character, no text, no numbered frames, no grid lines, no watermark. 1024x1024."
+    }
+  ]
+}
